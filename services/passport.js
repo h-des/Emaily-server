@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('users');
 
+//functions for chcecking if the user is valid
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -19,18 +20,19 @@ passport.deserializeUser((id, done) => {
 passport.use(new GoogleStrategy({
   clientID: keys.googleClientID,
   clientSecret: keys.googleClientSecret,
-  callbackURL: 'https://emaily-server-course.herokuapp.com/auth/google/callback',
+  callbackURL: '/auth/google/callback',
   proxy: true
-}, (accessToken, refreshToken, profile, done) => {
-  User.findOne({ googleID: profile.id }).then((existingUser) => {
+},
+  async (accessToken, refreshToken, profile, done) => {
+    const existingUser = await User.findOne({ googleID: profile.id })
     if (existingUser) {
-      done(null, existingUser);
-    } else {
-      new User({ googleID: profile.id })
-        .save()
-        .then(user => {
-          done(null, user);
-        });
+      return done(null, existingUser);
     }
-  });
-}));
+    const user = await new User({ 
+      googleID: profile.id,
+      name: profile.name.givenName,
+      img: profile.photos[0].value,
+      credits: 0
+     }).save()
+    done(null, user);
+  }));

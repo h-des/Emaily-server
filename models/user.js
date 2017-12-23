@@ -7,6 +7,16 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+  },
+  name: {
+    type: String
+  },
+  img: {
+    type: String
+  },
+  credits: {
+    type: Number,
+    defult: 0
   }
 })
 
