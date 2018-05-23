@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Footer extends Component {
   render() {
     return (
-       <footer className="page-footer">
+       <footer className="page-footer teal darken-3">
           <div className="container">
             <div className="row">
               <div className="col l6 s12">
@@ -22,7 +22,7 @@ export default class Footer extends Component {
           </div>
           <div className="footer-copyright">
             <div className="container">
-             2014 H-DES
+             2018 H-DES
             <a className="grey-text text-lighten-4 right" href="https://github.com/h-des">GitHub</a>
             </div>
           </div>

@@ -18,13 +18,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className=''>
         <BrowserRouter>
           <React.Fragment>
             <Header />
-            <Route exact path='/' render={()=>(this.props.auth ? (<Redirect to="/surveys"/>) : (<Landing/>))} />
-            <Route exact path='/surveys' component={Dashboard} />
-            <Route path='/surveys/new' component={SurveyNew} />
+            <div className="container">
+              <Route exact path='/' render={()=>(this.props.auth ? (<Redirect to="/surveys"/>) : (<Landing/>))} />
+              <Route exact path='/surveys' component={Dashboard} />
+              <Route path='/surveys/new' component={SurveyNew} />
+            </div>
             <Footer />
           </React.Fragment>
         </BrowserRouter>
